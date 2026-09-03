@@ -860,99 +860,92 @@ blurBtn.onclick =
 const searchInput =
   document.getElementById('searchInput');
 
+const searchButton =
+  document.getElementById('searchButton');
 
-if(searchInput){
 
-  searchInput.addEventListener(
-    'keydown',
-    function(event){
+function performSearch(){
 
-      if(event.key !== 'Enter'){
-        return;
-      }
+  let value =
+    searchInput.value.trim();
+
+
+  if(value === ''){
+    return;
+  }
+
+
+  /*
+     URL detection
+  */
+
+  if(
+    value.startsWith('http://') ||
+    value.startsWith('https://') ||
+    (
+      value.includes('.') &&
+      !value.includes(' ')
+    )
+  ){
+
+    if(
+      !value.startsWith('http://') &&
+      !value.startsWith('https://')
+    ){
+
+      value =
+        'https://' + value;
+
+    }
+
+
+    window.location.assign(value);
+
+  }
+
+  /*
+     Google search
+  */
+
+  else{
+
+    window.location.assign(
+      `https://www.google.com/search?q=${encodeURIComponent(value)}`
+    );
+
+  }
+
+}
+
+
+/*
+   ENTER KEY
+*/
+
+searchInput.addEventListener(
+  'keydown',
+  function(event){
+
+    if(event.key === 'Enter'){
 
       event.preventDefault();
 
-      const value =
-        searchInput.value.trim();
-
-
-      if(!value){
-        return;
-      }
-
-
-      /* =====================================================
-         DETECT WEBSITE URL
-      ===================================================== */
-
-      let isURL = false;
-
-
-      if(
-        value.startsWith('http://') ||
-        value.startsWith('https://')
-      ){
-
-        isURL = true;
-
-      }
-      else if(
-        value.includes('.') &&
-        !value.includes(' ')
-      ){
-
-        isURL = true;
-
-      }
-
-
-      /* =====================================================
-         OPEN WEBSITE
-      ===================================================== */
-
-      if(isURL){
-
-        let url = value;
-
-
-        if(
-          !url.startsWith('http://') &&
-          !url.startsWith('https://')
-        ){
-
-          url =
-            'https://' + url;
-
-        }
-
-
-        window.location.assign(url);
-
-      }
-
-
-      /* =====================================================
-         GOOGLE SEARCH
-      ===================================================== */
-
-      else{
-
-        const googleSearchURL =
-          'https://www.google.com/search?q=' +
-          encodeURIComponent(value);
-
-
-        window.location.assign(
-          googleSearchURL
-        );
-
-      }
+      performSearch();
 
     }
-  );
 
-}
+  }
+);
+
+
+/*
+   FIRE SEARCH BUTTON
+*/
+
+searchButton.addEventListener(
+  'click',
+  performSearch
+);
 
 
 /* =========================================================
