@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Arsalan Hub</title>
+  <link rel="icon" type="image/png" href="Images/Icon Images/A_Logo.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css"/>
+
+</head>
+
+<body>
+
+  <div class="background"></div>
+  <div class="glass-overlay"></div>
+  <div class="red-line"></div>
+
+  <!-- NAVBAR -->
+
+  <div class="navbar">
+
+    <div class="logo">
+      <img src="Images/Icon Images/A_Logo1.png" alt="Logo" class="logo-icon">
+      <h1>Arsalan Hub</h1>
+    </div>
+
+    <div class="nav-area">
+
+      <div class="nav-buttons" id="navButtons">
+
+        <button
+        class="nav-btn active"
+        data-page="home">
+
+          <span>Home</span>
+
+        </button>
+
+        <button class="add-page-btn" id="addPageBtn">
+          +
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="top-controls">
+
+      <button
+      class="toggle-btn blur-off"
+      id="blurToggleBtn">
+
+        👁
+      </button>
+
+      <button
+      class="toggle-btn"
+      id="bgImageBtn">
+
+        🖼
+
+      </button>
+
+      <input
+      type="file"
+      id="bgImageInput"
+      accept="image/*"
+      style="display:none;">
+
+    </div>
+
+  </div>
+
+  <!-- MAIN -->
+
+  <div class="main" id="mainContent">
+
+    <div class="page active" id="homePage">
+
+      <div class="home-center">
+
+        <p>
+          Your personal <span>browsers</span> workspace
+        </p>
+
+        <div class="big-search">
+
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search Google or type URL..."
+          >
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="modal-overlay" id="pageModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>Create New Page</h2>
+        <p>Enter a name for your page and it will appear in the navigation bar.</p>
+      </div>
+      <input
+        id="newPageName"
+        class="modal-input"
+        type="text"
+        placeholder="Page name"
+      />
+      <div class="modal-error" id="modalError">Page name cannot be empty.</div>
+      <div class="modal-actions">
+        <button class="modal-button secondary" id="cancelPageBtn">Cancel</button>
+        <button class="modal-button primary" id="createPageBtn">Create Page</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="boardModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>Create New Board</h2>
+        <p>Enter a name for this board and it will be added to the current page.</p>
+      </div>
+      <input
+        id="newBoardName"
+        class="modal-input"
+        type="text"
+        placeholder="Board name"
+      />
+      <div class="modal-error" id="boardModalError">Board name cannot be empty.</div>
+      <div class="modal-actions">
+        <button class="modal-button secondary" id="cancelBoardBtn">Cancel</button>
+        <button class="modal-button primary" id="createBoardBtn">Create Board</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="linkModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>Add New Link</h2>
+        <p>Enter the link name and URL to add it to this board.</p>
+      </div>
+      <input
+        id="newLinkName"
+        class="modal-input"
+        type="text"
+        placeholder="Link name"
+      />
+      <input
+        id="newLinkURL"
+        class="modal-input"
+        type="text"
+        placeholder="Link URL"
+      />
+      <div class="modal-error" id="linkModalError">Link name and URL are required.</div>
+      <div class="modal-actions">
+        <button class="modal-button secondary" id="cancelLinkBtn">Cancel</button>
+        <button class="modal-button primary" id="createLinkBtn">Add Link</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="editModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="editTitle">Edit Item</h2>
+        <p id="editSubtitle">Update the name or URL for the selected item.</p>
+      </div>
+      <input
+        id="editName"
+        class="modal-input"
+        type="text"
+        placeholder="Name"
+      />
+      <input
+        id="editURL"
+        class="modal-input"
+        type="text"
+        placeholder="URL"
+        style="display:none;"
+      />
+      <input
+        id="editImage"
+        class="modal-input"
+        type="text"
+        placeholder="Icon URL (optional)"
+        style="display:none;"
+      />
+
+      <button id="uploadIconBtn" class="add-link-btn" type="button">Upload Icon</button>
+      
+      <input
+        type="file"
+        id="iconUploadInput"
+        accept="image/*"
+        style="display:none;"
+      >
+      <div class="modal-error" id="editModalError">Please enter a valid name.</div>
+      <div class="modal-actions">
+        <button class="modal-button secondary" id="cancelEditBtn">Cancel</button>
+        <button class="modal-button primary" id="saveEditBtn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="confirmModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="confirmTitle">Confirm Action</h2>
+        <p id="confirmMessage">Are you sure?</p>
+      </div>
+      <div class="modal-actions">
+        <button class="modal-button secondary" id="cancelConfirmBtn">Cancel</button>
+        <button class="modal-button primary" id="confirmBtn">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="backgroundModal">
+
+  <div class="modal-card">
+
+    <div class="modal-header">
+
+      <h2>Change Background</h2>
+
+      <p>
+        Upload image from your device or paste image URL.
+      </p>
+
+    </div>
+
+    <input
+    type="text"
+    id="backgroundURL"
+    class="modal-input"
+    placeholder="Paste image URL">
+
+    <div class="modal-actions">
+
+      <button
+      class="modal-button secondary"
+      id="uploadBackgroundBtn">
+
+        Upload From Device
+
+      </button>
+
+      <button
+      class="modal-button secondary"
+      id="removeBackgroundBtn">
+
+      Remove Background
+
+      </button>
+
+      <button
+      class="modal-button secondary"
+      id="cancelBackgroundBtn">
+
+        Cancel
+
+      </button>
+
+      <button
+      class="modal-button primary"
+      id="saveBackgroundBtn">
+
+        Apply Background
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
