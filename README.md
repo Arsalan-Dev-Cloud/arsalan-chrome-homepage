@@ -13,5 +13,4 @@
 
   For Tab/Mobile:-
 
-  1] Copy the link and open the chrome, open chrome setting, click Homepage, and enable 'Enter Custom Web address', and paste the copied link there, and make it shortcut, or us can get it by 
-     clicking it on the home icon at the top left side of the corner of the chrome.
+  1] Copy this link https://arsalan-dev-cloud.github.io/arsalan-chrome-homepage/ and open the chrome, open chrome setting, click Homepage, and enable 'Enter Custom Web address', and paste the      copied link there, and make it shortcut, or us can get it by clicking it on the home icon at the top left side of the corner of the chrome.
