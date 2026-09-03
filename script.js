@@ -858,60 +858,101 @@ blurBtn.onclick =
 ========================================================= */
 
 const searchInput =
-  document.getElementById(
-    'searchInput'
-  );
+  document.getElementById('searchInput');
 
 
-searchInput.addEventListener(
-  'keypress',
-  function(event){
+if(searchInput){
 
-    if(event.key === 'Enter'){
+  searchInput.addEventListener(
+    'keydown',
+    function(event){
 
-      let value =
+      if(event.key !== 'Enter'){
+        return;
+      }
+
+      event.preventDefault();
+
+      const value =
         searchInput.value.trim();
 
 
-      if(value !== ''){
+      if(!value){
+        return;
+      }
+
+
+      /* =====================================================
+         DETECT WEBSITE URL
+      ===================================================== */
+
+      let isURL = false;
+
+
+      if(
+        value.startsWith('http://') ||
+        value.startsWith('https://')
+      ){
+
+        isURL = true;
+
+      }
+      else if(
+        value.includes('.') &&
+        !value.includes(' ')
+      ){
+
+        isURL = true;
+
+      }
+
+
+      /* =====================================================
+         OPEN WEBSITE
+      ===================================================== */
+
+      if(isURL){
+
+        let url = value;
+
 
         if(
-          value.includes('.') &&
-          !value.includes(' ')
+          !url.startsWith('http://') &&
+          !url.startsWith('https://')
         ){
 
-          if(
-            !value.startsWith(
-              'http://'
-            ) &&
-            !value.startsWith(
-              'https://'
-            )
-          ){
-
-            value =
-              'https://' + value;
-
-          }
-
-
-          window.location.href =
-            value;
+          url =
+            'https://' + url;
 
         }
-        else{
 
-          window.location.href =
-            `https://www.google.com/search?q=${encodeURIComponent(value)}`;
 
-        }
+        window.location.assign(url);
+
+      }
+
+
+      /* =====================================================
+         GOOGLE SEARCH
+      ===================================================== */
+
+      else{
+
+        const googleSearchURL =
+          'https://www.google.com/search?q=' +
+          encodeURIComponent(value);
+
+
+        window.location.assign(
+          googleSearchURL
+        );
 
       }
 
     }
+  );
 
-  }
-);
+}
 
 
 /* =========================================================
