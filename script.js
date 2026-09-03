@@ -1,39 +1,26 @@
-/* =========================
-   PERSONAL NAME SYSTEM
-========================= */
+/* =========================================================
+   CUSTOM CHROME HOMEPAGE
+   PERSONALIZATION + PAGES + BOARDS + LINKS + BACKGROUND
+========================================================= */
 
-const nameModal =
-  document.getElementById('nameModal');
 
-const userNameInput =
-  document.getElementById('userNameInput');
-
-const saveNameBtn =
-  document.getElementById('saveNameBtn');
-
-const nameModalError =
-  document.getElementById('nameModalError');
-
-const changeNameBtn =
-  document.getElementById('changeNameBtn');
-
-const changeNameModal =
-  document.getElementById('changeNameModal');
-
-const changeNameInput =
-  document.getElementById('changeNameInput');
-
-const changeNameError =
-  document.getElementById('changeNameError');
-
-const saveChangeNameBtn =
-  document.getElementById('saveChangeNameBtn');
-
-const cancelChangeNameBtn =
-  document.getElementById('cancelChangeNameBtn');
+/* =========================================================
+   PERSONALIZATION SYSTEM
+========================================================= */
 
 let userName =
-  localStorage.getItem('userName');
+  localStorage.getItem('userName') || '';
+
+let userImage =
+  localStorage.getItem('userImage') || '';
+
+
+const DEFAULT_HUB_IMAGE =
+  'Images/Icon Images/A_Logo1.png';
+
+
+const DEFAULT_FAVICON =
+  'Images/Icon Images/A_Logo.png';
 
 
 function updateHubName(){
@@ -42,6 +29,7 @@ function updateHubName(){
     document.querySelector('.logo h1');
 
   if(!logoTitle) return;
+
 
   if(userName){
 
@@ -55,38 +43,299 @@ function updateHubName(){
       hubName;
 
   }
+  else{
+
+    logoTitle.textContent =
+      'Arsalan Hub';
+
+    document.title =
+      'Arsalan Hub';
+
+  }
 
 }
 
+
+/* =========================================================
+   UPDATE HUB IMAGE + FAVICON
+========================================================= */
+
+function updateHubImage(){
+
+  const hubLogo =
+    document.getElementById('hubLogo');
+
+  const favicon =
+    document.getElementById('faviconLink');
+
+
+  const image =
+    userImage || DEFAULT_HUB_IMAGE;
+
+
+  if(hubLogo){
+
+    hubLogo.src =
+      image;
+
+  }
+
+
+  if(favicon){
+
+    favicon.href =
+      userImage || DEFAULT_FAVICON;
+
+  }
+
+}
+
+
+/* =========================================================
+   UPDATE EVERYTHING
+========================================================= */
+
+function updatePersonalization(){
+
+  updateHubName();
+
+  updateHubImage();
+
+}
+
+
+/* =========================================================
+   IMAGE READER
+========================================================= */
+
+function readImageFile(
+  file,
+  callback
+){
+
+  if(!file) return;
+
+
+  if(!file.type.startsWith('image/')){
+
+    alert('Please select a valid image.');
+
+    return;
+
+  }
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload =
+    ()=>{
+      callback(
+        reader.result
+      );
+    };
+
+
+  reader.readAsDataURL(
+    file
+  );
+
+}
+
+
+/* =========================================================
+   IMAGE PREVIEW
+========================================================= */
+
+function setImagePreview(
+  previewElement,
+  image
+){
+
+  if(!previewElement) return;
+
+
+  if(image){
+
+    previewElement.innerHTML = `
+
+      <img
+        src="${image}"
+        alt="Hub image preview"
+      >
+
+    `;
+
+  }
+  else{
+
+    previewElement.innerHTML =
+      '<span>🖼</span>';
+
+  }
+
+}
+
+
+/* =========================================================
+   PERSONALIZATION ELEMENTS
+========================================================= */
+
+const nameModal =
+  document.getElementById(
+    'nameModal'
+  );
+
+
+const userNameInput =
+  document.getElementById(
+    'userNameInput'
+  );
+
+
+const saveNameBtn =
+  document.getElementById(
+    'saveNameBtn'
+  );
+
+
+const nameModalError =
+  document.getElementById(
+    'nameModalError'
+  );
+
+
+const nameImageInput =
+  document.getElementById(
+    'nameImageInput'
+  );
+
+
+const selectNameImageBtn =
+  document.getElementById(
+    'selectNameImageBtn'
+  );
+
+
+const removeNameImageBtn =
+  document.getElementById(
+    'removeNameImageBtn'
+  );
+
+
+const nameImagePreview =
+  document.getElementById(
+    'nameImagePreview'
+  );
+
+
+const changeNameBtn =
+  document.getElementById(
+    'changeNameBtn'
+  );
+
+
+const changeNameModal =
+  document.getElementById(
+    'changeNameModal'
+  );
+
+
+const changeNameInput =
+  document.getElementById(
+    'changeNameInput'
+  );
+
+
+const changeNameError =
+  document.getElementById(
+    'changeNameError'
+  );
+
+
+const saveChangeNameBtn =
+  document.getElementById(
+    'saveChangeNameBtn'
+  );
+
+
+const cancelChangeNameBtn =
+  document.getElementById(
+    'cancelChangeNameBtn'
+  );
+
+
+const changeImageInput =
+  document.getElementById(
+    'changeImageInput'
+  );
+
+
+const selectChangeImageBtn =
+  document.getElementById(
+    'selectChangeImageBtn'
+  );
+
+
+const removeChangeImageBtn =
+  document.getElementById(
+    'removeChangeImageBtn'
+  );
+
+
+const changeImagePreview =
+  document.getElementById(
+    'changeImagePreview'
+  );
+
+
+/* =========================================================
+   FIRST VISIT
+========================================================= */
 
 function checkFirstVisit(){
 
   if(!userName){
 
-    nameModal.classList.add('active');
+    nameModal.classList.add(
+      'active'
+    );
 
-    setTimeout(()=>{
 
-      userNameInput.focus();
-
-    },200);
+    setTimeout(
+      ()=>{
+        userNameInput.focus();
+      },
+      200
+    );
 
   }
   else{
 
-    updateHubName();
+    updatePersonalization();
 
   }
 
 }
 
+
+/* =========================================================
+   SAVE FIRST PERSONALIZATION
+========================================================= */
 
 function saveUserName(){
 
   const name =
     userNameInput.value.trim();
 
+
+  /* NAME IS REQUIRED */
+
   if(!name){
+
+    nameModalError.textContent =
+      'Please enter your name.';
 
     nameModalError.style.display =
       'block';
@@ -97,49 +346,157 @@ function saveUserName(){
 
   }
 
-  userName = name;
+
+  userName =
+    name;
+
 
   localStorage.setItem(
     'userName',
     userName
   );
 
+
+  /* IMAGE IS OPTIONAL */
+
+  if(userImage){
+
+    localStorage.setItem(
+      'userImage',
+      userImage
+    );
+
+  }
+  else{
+
+    localStorage.removeItem(
+      'userImage'
+    );
+
+  }
+
+
   nameModalError.style.display =
     'none';
 
-  updateHubName();
+
+  updatePersonalization();
+
 
   nameModal.classList.remove(
     'active'
   );
 
-  userNameInput.value = '';
+
+  userNameInput.value =
+    '';
 
 }
 
+
+/* =========================================================
+   SELECT FIRST IMAGE
+========================================================= */
+
+selectNameImageBtn.onclick =
+  ()=>{
+
+    nameImageInput.click();
+
+  };
+
+
+nameImageInput.onchange =
+  (event)=>{
+
+    const file =
+      event.target.files[0];
+
+
+    if(!file) return;
+
+
+    readImageFile(
+      file,
+      (image)=>{
+
+        userImage =
+          image;
+
+
+        setImagePreview(
+          nameImagePreview,
+          userImage
+        );
+
+      }
+    );
+
+  };
+
+
+/* =========================================================
+   REMOVE FIRST IMAGE
+========================================================= */
+
+removeNameImageBtn.onclick =
+  ()=>{
+
+    userImage =
+      '';
+
+
+    setImagePreview(
+      nameImagePreview,
+      ''
+    );
+
+
+    nameImageInput.value =
+      '';
+
+  };
+
+
+/* =========================================================
+   OPEN CHANGE PERSONALIZATION
+========================================================= */
 
 function openChangeNameModal(){
 
   changeNameInput.value =
     userName || '';
 
+
   changeNameError.style.display =
     'none';
+
+
+  setImagePreview(
+    changeImagePreview,
+    userImage
+  );
+
 
   changeNameModal.classList.add(
     'active'
   );
 
-  setTimeout(()=>{
 
-    changeNameInput.focus();
-
-    changeNameInput.select();
-
-  },150);
+  setTimeout(
+    ()=>{
+      changeNameInput.focus();
+      changeNameInput.select();
+    },
+    150
+  );
 
 }
 
+
+/* =========================================================
+   CLOSE CHANGE PERSONALIZATION
+========================================================= */
 
 function closeChangeNameModal(){
 
@@ -150,12 +507,84 @@ function closeChangeNameModal(){
 }
 
 
+/* =========================================================
+   SELECT CHANGE IMAGE
+========================================================= */
+
+selectChangeImageBtn.onclick =
+  ()=>{
+
+    changeImageInput.click();
+
+  };
+
+
+changeImageInput.onchange =
+  (event)=>{
+
+    const file =
+      event.target.files[0];
+
+
+    if(!file) return;
+
+
+    readImageFile(
+      file,
+      (image)=>{
+
+        userImage =
+          image;
+
+
+        setImagePreview(
+          changeImagePreview,
+          userImage
+        );
+
+      }
+    );
+
+  };
+
+
+/* =========================================================
+   REMOVE CHANGE IMAGE
+========================================================= */
+
+removeChangeImageBtn.onclick =
+  ()=>{
+
+    userImage =
+      '';
+
+
+    setImagePreview(
+      changeImagePreview,
+      ''
+    );
+
+
+    changeImageInput.value =
+      '';
+
+  };
+
+
+/* =========================================================
+   SAVE CHANGED PERSONALIZATION
+========================================================= */
+
 function saveChangedName(){
 
   const name =
     changeNameInput.value.trim();
 
+
   if(!name){
+
+    changeNameError.textContent =
+      'Please enter your name.';
 
     changeNameError.style.display =
       'block';
@@ -166,112 +595,182 @@ function saveChangedName(){
 
   }
 
-  userName = name;
+
+  userName =
+    name;
+
 
   localStorage.setItem(
     'userName',
     userName
   );
 
-  updateHubName();
+
+  if(userImage){
+
+    localStorage.setItem(
+      'userImage',
+      userImage
+    );
+
+  }
+  else{
+
+    localStorage.removeItem(
+      'userImage'
+    );
+
+  }
+
+
+  updatePersonalization();
+
 
   closeChangeNameModal();
 
 }
 
 
-saveNameBtn.addEventListener(
-  'click',
-  saveUserName
-);
+/* =========================================================
+   PERSONALIZATION EVENTS
+========================================================= */
+
+if(saveNameBtn){
+
+  saveNameBtn.addEventListener(
+    'click',
+    saveUserName
+  );
+
+}
 
 
-changeNameBtn.addEventListener(
-  'click',
-  openChangeNameModal
-);
+if(changeNameBtn){
+
+  changeNameBtn.addEventListener(
+    'click',
+    openChangeNameModal
+  );
+
+}
 
 
-saveChangeNameBtn.addEventListener(
-  'click',
-  saveChangedName
-);
+if(saveChangeNameBtn){
+
+  saveChangeNameBtn.addEventListener(
+    'click',
+    saveChangedName
+  );
+
+}
 
 
-cancelChangeNameBtn.addEventListener(
-  'click',
-  closeChangeNameModal
-);
+if(cancelChangeNameBtn){
+
+  cancelChangeNameBtn.addEventListener(
+    'click',
+    closeChangeNameModal
+  );
+
+}
 
 
-userNameInput.addEventListener(
-  'keypress',
-  (event)=>{
+if(userNameInput){
 
-    if(event.key === 'Enter'){
+  userNameInput.addEventListener(
+    'keydown',
+    (event)=>{
 
-      saveUserName();
+      if(event.key === 'Enter'){
 
-    }
+        saveUserName();
 
-  }
-);
-
-
-changeNameInput.addEventListener(
-  'keypress',
-  (event)=>{
-
-    if(event.key === 'Enter'){
-
-      saveChangedName();
-
-    }
-
-  }
-);
-
-
-changeNameModal.addEventListener(
-  'click',
-  (event)=>{
-
-    if(event.target === changeNameModal){
-
-      closeChangeNameModal();
+      }
 
     }
+  );
 
-  }
-);
+}
 
 
-/* =========================
+if(changeNameInput){
+
+  changeNameInput.addEventListener(
+    'keydown',
+    (event)=>{
+
+      if(event.key === 'Enter'){
+
+        saveChangedName();
+
+      }
+
+    }
+  );
+
+}
+
+
+if(changeNameModal){
+
+  changeNameModal.addEventListener(
+    'click',
+    (event)=>{
+
+      if(
+        event.target ===
+        changeNameModal
+      ){
+
+        closeChangeNameModal();
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
    NAVIGATION
-========================= */
+========================================================= */
 
 const navButtons =
-  document.getElementById('navButtons');
+  document.getElementById(
+    'navButtons'
+  );
+
 
 const mainContent =
-  document.getElementById('mainContent');
+  document.getElementById(
+    'mainContent'
+  );
+
 
 const homeButton =
-  document.querySelector('[data-page="home"]');
+  document.querySelector(
+    '[data-page="home"]'
+  );
+
 
 const navArea =
-  document.querySelector('.nav-area');
+  document.querySelector(
+    '.nav-area'
+  );
 
 
 let customPages =
   JSON.parse(
-    localStorage.getItem('customPages')
+    localStorage.getItem(
+      'customPages'
+    )
   ) || [];
 
 
-/* =========================
+/* =========================================================
    BLUR SYSTEM
-========================= */
+========================================================= */
 
 const blurBtn =
   document.getElementById(
@@ -280,8 +779,9 @@ const blurBtn =
 
 
 let blurEnabled =
-  localStorage.getItem('globalBlur')
-  === 'true';
+  localStorage.getItem(
+    'globalBlur'
+  ) === 'true';
 
 
 function updateBlurUI(){
@@ -292,32 +792,37 @@ function updateBlurUI(){
       'blur-enabled'
     );
 
+
     blurBtn.classList.remove(
       'blur-off'
     );
+
 
     blurBtn.classList.add(
       'blur-on'
     );
 
+
     blurBtn.innerHTML =
       '🌫';
 
   }
-
   else{
 
     document.body.classList.remove(
       'blur-enabled'
     );
 
+
     blurBtn.classList.remove(
       'blur-on'
     );
 
+
     blurBtn.classList.add(
       'blur-off'
     );
+
 
     blurBtn.innerHTML =
       '👁';
@@ -330,24 +835,27 @@ function updateBlurUI(){
 updateBlurUI();
 
 
-blurBtn.onclick = ()=>{
+blurBtn.onclick =
+  ()=>{
 
-  blurEnabled =
-    !blurEnabled;
-
-  localStorage.setItem(
-    'globalBlur',
-    blurEnabled
-  );
-
-  updateBlurUI();
-
-};
+    blurEnabled =
+      !blurEnabled;
 
 
-/* =========================
+    localStorage.setItem(
+      'globalBlur',
+      blurEnabled
+    );
+
+
+    updateBlurUI();
+
+  };
+
+
+/* =========================================================
    SEARCH
-========================= */
+========================================================= */
 
 const searchInput =
   document.getElementById(
@@ -357,12 +865,13 @@ const searchInput =
 
 searchInput.addEventListener(
   'keypress',
-  function(e){
+  function(event){
 
-    if(e.key === 'Enter'){
+    if(event.key === 'Enter'){
 
       let value =
         searchInput.value.trim();
+
 
       if(value !== ''){
 
@@ -385,11 +894,11 @@ searchInput.addEventListener(
 
           }
 
+
           window.location.href =
             value;
 
         }
-
         else{
 
           window.location.href =
@@ -405,9 +914,9 @@ searchInput.addEventListener(
 );
 
 
-/* =========================
+/* =========================================================
    ACTIVATE PAGE
-========================= */
+========================================================= */
 
 function activatePage(
   pageId,
@@ -416,28 +925,31 @@ function activatePage(
 
   document
     .querySelectorAll('.page')
-    .forEach(page=>{
-
-      page.classList.remove(
-        'active'
-      );
-
-    });
+    .forEach(
+      page=>{
+        page.classList.remove(
+          'active'
+        );
+      }
+    );
 
 
   document
     .querySelectorAll('.nav-btn')
-    .forEach(btn=>{
-
-      btn.classList.remove(
-        'active'
-      );
-
-    });
+    .forEach(
+      btn=>{
+        btn.classList.remove(
+          'active'
+        );
+      }
+    );
 
 
   const page =
-    document.getElementById(pageId);
+    document.getElementById(
+      pageId
+    );
+
 
   if(page){
 
@@ -459,19 +971,18 @@ function activatePage(
 }
 
 
-homeButton.onclick = ()=>{
+homeButton.onclick =
+  ()=>{
+    activatePage(
+      'homePage',
+      homeButton
+    );
+  };
 
-  activatePage(
-    'homePage',
-    homeButton
-  );
 
-};
-
-
-/* =========================
-   SAVE
-========================= */
+/* =========================================================
+   SAVE PAGES
+========================================================= */
 
 function savePages(){
 
@@ -485,9 +996,9 @@ function savePages(){
 }
 
 
-/* =========================
-   FAVICON SYSTEM
-========================= */
+/* =========================================================
+   FAVICON FUNCTIONS
+========================================================= */
 
 function getFaviconUrl(domain){
 
@@ -531,7 +1042,6 @@ function getDomainFromUrl(url){
     return new URL(url).hostname;
 
   }
-
   catch{
 
     return '';
@@ -584,9 +1094,9 @@ function getPlaceholderIcon(domain){
 }
 
 
-/* =========================
+/* =========================================================
    RENDER BOARDS
-========================= */
+========================================================= */
 
 function renderBoards(pageIndex){
 
@@ -599,13 +1109,14 @@ function renderBoards(pageIndex){
   if(!container) return;
 
 
-  container.innerHTML = '';
+  container.innerHTML =
+    '';
 
 
   customPages[pageIndex]
     .boards
     ?.forEach(
-      (board,boardIndex)=>{
+      (board, boardIndex)=>{
 
         const boardDiv =
           document.createElement(
@@ -693,7 +1204,7 @@ function renderBoards(pageIndex){
 
 
         board.links.forEach(
-          (link,linkIndex)=>{
+          (link, linkIndex)=>{
 
             const card =
               document.createElement(
@@ -757,10 +1268,6 @@ function renderBoards(pageIndex){
             `;
 
 
-            /* =========================
-               ICON SYSTEM
-            ========================= */
-
             const img =
               document.createElement(
                 'img'
@@ -792,7 +1299,8 @@ function renderBoards(pageIndex){
             ].filter(Boolean);
 
 
-            let currentIndex = 0;
+            let currentIndex =
+              0;
 
 
             function loadNextIcon(){
@@ -817,40 +1325,42 @@ function renderBoards(pageIndex){
                   currentIndex
                 ];
 
+
               currentIndex++;
 
             }
 
 
-            img.onerror = ()=>{
+            img.onerror =
+              ()=>{
+                loadNextIcon();
+              };
 
-              loadNextIcon();
 
-            };
+            img.onload =
+              ()=>{
+
+                if(
+                  customPages[pageIndex] &&
+                  customPages[pageIndex]
+                    .boards[boardIndex] &&
+                  customPages[pageIndex]
+                    .boards[boardIndex]
+                    .links[linkIndex]
+                ){
+
+                  customPages[pageIndex]
+                    .boards[boardIndex]
+                    .links[linkIndex]
+                    .image =
+                      img.src;
 
 
-            img.onload = ()=>{
+                  savePages();
 
-              if(
-                customPages[pageIndex] &&
-                customPages[pageIndex]
-                  .boards[boardIndex] &&
-                customPages[pageIndex]
-                  .boards[boardIndex]
-                  .links[linkIndex]
-              ){
+                }
 
-                customPages[pageIndex]
-                  .boards[boardIndex]
-                  .links[linkIndex]
-                  .image =
-                    img.src;
-
-                savePages();
-
-              }
-
-            };
+              };
 
 
             loadNextIcon();
@@ -875,28 +1385,32 @@ function renderBoards(pageIndex){
 }
 
 
-/* =========================
+/* =========================================================
    RENDER PAGES
-========================= */
+========================================================= */
 
 function renderPages(){
 
   document
     .querySelectorAll('.dynamic-btn')
     .forEach(
-      btn=>btn.remove()
+      btn=>{
+        btn.remove();
+      }
     );
 
 
   document
     .querySelectorAll('.dynamic-page')
     .forEach(
-      page=>page.remove()
+      page=>{
+        page.remove();
+      }
     );
 
 
   customPages.forEach(
-    (page,index)=>{
+    (page, index)=>{
 
       const btn =
         document.createElement(
@@ -1026,14 +1540,13 @@ function renderPages(){
       );
 
 
-      btn.onclick = ()=>{
-
-        activatePage(
-          `dynamicPage${index}`,
-          btn
-        );
-
-      };
+      btn.onclick =
+        ()=>{
+          activatePage(
+            `dynamicPage${index}`,
+            btn
+          );
+        };
 
 
       renderBoards(index);
@@ -1048,29 +1561,33 @@ function renderPages(){
 }
 
 
-/* =========================
+/* =========================================================
    MODAL ELEMENTS
-========================= */
+========================================================= */
 
 const pageModal =
   document.getElementById(
     'pageModal'
   );
 
+
 const newPageNameInput =
   document.getElementById(
     'newPageName'
   );
+
 
 const modalError =
   document.getElementById(
     'modalError'
   );
 
+
 const createPageBtn =
   document.getElementById(
     'createPageBtn'
   );
+
 
 const cancelPageBtn =
   document.getElementById(
@@ -1083,20 +1600,24 @@ const boardModal =
     'boardModal'
   );
 
+
 const newBoardNameInput =
   document.getElementById(
     'newBoardName'
   );
+
 
 const boardModalError =
   document.getElementById(
     'boardModalError'
   );
 
+
 const createBoardBtn =
   document.getElementById(
     'createBoardBtn'
   );
+
 
 const cancelBoardBtn =
   document.getElementById(
@@ -1109,25 +1630,30 @@ const linkModal =
     'linkModal'
   );
 
+
 const newLinkNameInput =
   document.getElementById(
     'newLinkName'
   );
+
 
 const newLinkURLInput =
   document.getElementById(
     'newLinkURL'
   );
 
+
 const linkModalError =
   document.getElementById(
     'linkModalError'
   );
 
+
 const createLinkBtn =
   document.getElementById(
     'createLinkBtn'
   );
+
 
 const cancelLinkBtn =
   document.getElementById(
@@ -1140,20 +1666,24 @@ const confirmModal =
     'confirmModal'
   );
 
+
 const confirmTitle =
   document.getElementById(
     'confirmTitle'
   );
+
 
 const confirmMessage =
   document.getElementById(
     'confirmMessage'
   );
 
+
 const confirmBtn =
   document.getElementById(
     'confirmBtn'
   );
+
 
 const cancelConfirmBtn =
   document.getElementById(
@@ -1166,20 +1696,24 @@ const editModal =
     'editModal'
   );
 
+
 const editTitle =
   document.getElementById(
     'editTitle'
   );
+
 
 const editNameInput =
   document.getElementById(
     'editName'
   );
 
+
 const editURLInput =
   document.getElementById(
     'editURL'
   );
+
 
 const editImageInput =
   document.getElementById(
@@ -1217,28 +1751,39 @@ const cancelEditBtn =
   );
 
 
-let activeBoardPageIndex = null;
-
-let activeBoardIndex = null;
-
-let activeLinkIndex = null;
-
-let editMode = null;
-
-let confirmAction = null;
+let activeBoardPageIndex =
+  null;
 
 
-/* =========================
+let activeBoardIndex =
+  null;
+
+
+let activeLinkIndex =
+  null;
+
+
+let editMode =
+  null;
+
+
+let confirmAction =
+  null;
+
+
+/* =========================================================
    PAGE MODAL
-========================= */
+========================================================= */
 
 function openPageModal(){
 
   newPageNameInput.value =
     '';
 
+
   modalError.style.display =
     'none';
+
 
   pageModal.classList.add(
     'active'
@@ -1282,9 +1827,11 @@ function createPage(){
 
   customPages.push({
 
-    name:pageName,
+    name:
+      pageName,
 
-    boards:[]
+    boards:
+      []
 
   });
 
@@ -1315,9 +1862,9 @@ function createPage(){
 }
 
 
-/* =========================
+/* =========================================================
    BOARD MODAL
-========================= */
+========================================================= */
 
 function openBoardModal(
   pageIndex
@@ -1392,9 +1939,11 @@ function createBoard(){
     activeBoardPageIndex
   ].boards.push({
 
-    name:boardName,
+    name:
+      boardName,
 
-    links:[]
+    links:
+      []
 
   });
 
@@ -1417,9 +1966,9 @@ function createBoard(){
 }
 
 
-/* =========================
+/* =========================================================
    LINK MODAL
-========================= */
+========================================================= */
 
 function openLinkModal(
   pageIndex,
@@ -1429,6 +1978,7 @@ function openLinkModal(
   activeBoardPageIndex =
     pageIndex;
 
+
   activeBoardIndex =
     boardIndex;
 
@@ -1436,8 +1986,13 @@ function openLinkModal(
   newLinkNameInput.value =
     '';
 
+
   newLinkURLInput.value =
     '';
+
+
+  linkModalError.textContent =
+    'Link name and URL are required.';
 
 
   linkModalError.style.display =
@@ -1469,6 +2024,7 @@ function closeLinkModal(){
   activeBoardPageIndex =
     null;
 
+
   activeBoardIndex =
     null;
 
@@ -1486,6 +2042,9 @@ function createLink(){
 
 
   if(!name || !url){
+
+    linkModalError.textContent =
+      'Link name and URL are required.';
 
     linkModalError.style.display =
       'block';
@@ -1515,7 +2074,6 @@ function createLink(){
       new URL(url).hostname;
 
   }
-
   catch{
 
     linkModalError.textContent =
@@ -1578,11 +2136,13 @@ function createLink(){
 }
 
 
-/* =========================
+/* =========================================================
    EDIT SYSTEM
-========================= */
+========================================================= */
 
-function openEditModal(mode){
+function openEditModal(
+  mode
+){
 
   editMode =
     mode;
@@ -1596,12 +2156,8 @@ function openEditModal(mode){
     'none';
 
 
-  if(editImageInput){
-
-    editImageInput.style.display =
-      'none';
-
-  }
+  editImageInput.style.display =
+    'none';
 
 
   editModal.classList.add(
@@ -1615,12 +2171,8 @@ function openEditModal(mode){
       'block';
 
 
-    if(editImageInput){
-
-      editImageInput.style.display =
-        'block';
-
-    }
+    editImageInput.style.display =
+      'block';
 
   }
 
@@ -1645,11 +2197,14 @@ function closeEditModal(){
   editMode =
     null;
 
+
   activeBoardPageIndex =
     null;
 
+
   activeBoardIndex =
     null;
+
 
   activeLinkIndex =
     null;
@@ -1739,7 +2294,6 @@ function saveEdit(){
         new URL(url).hostname;
 
     }
-
     catch{
 
       editModalError.textContent =
@@ -1758,7 +2312,7 @@ function saveEdit(){
 
 
     const manualImage =
-      editImageInput?.value.trim();
+      editImageInput.value.trim();
 
 
     if(manualImage){
@@ -1767,7 +2321,6 @@ function saveEdit(){
         manualImage;
 
     }
-
     else{
 
       image =
@@ -1791,8 +2344,10 @@ function saveEdit(){
     linkItem.name =
       name;
 
+
     linkItem.url =
       url;
+
 
     linkItem.image =
       image;
@@ -1847,18 +2402,6 @@ function openEditPage(
     ].name;
 
 
-  editURLInput.style.display =
-    'none';
-
-
-  if(editImageInput){
-
-    editImageInput.style.display =
-      'none';
-
-  }
-
-
   openEditModal(
     'page'
   );
@@ -1873,6 +2416,7 @@ function openEditBoard(
 
   activeBoardPageIndex =
     pageIndex;
+
 
   activeBoardIndex =
     boardIndex;
@@ -1891,18 +2435,6 @@ function openEditBoard(
     ].name;
 
 
-  editURLInput.style.display =
-    'none';
-
-
-  if(editImageInput){
-
-    editImageInput.style.display =
-      'none';
-
-  }
-
-
   openEditModal(
     'board'
   );
@@ -1919,8 +2451,10 @@ function openEditLink(
   activeBoardPageIndex =
     pageIndex;
 
+
   activeBoardIndex =
     boardIndex;
+
 
   activeLinkIndex =
     linkIndex;
@@ -1946,23 +2480,12 @@ function openEditLink(
     linkItem.name;
 
 
-  editURLInput.style.display =
-    'block';
-
-
   editURLInput.value =
     linkItem.url;
 
 
-  if(editImageInput){
-
-    editImageInput.style.display =
-      'block';
-
-    editImageInput.value =
-      linkItem.image || '';
-
-  }
+  editImageInput.value =
+    linkItem.image || '';
 
 
   openEditModal(
@@ -1972,9 +2495,9 @@ function openEditLink(
 }
 
 
-/* =========================
+/* =========================================================
    CONFIRM MODAL
-========================= */
+========================================================= */
 
 function openConfirmModal(
   title,
@@ -1985,8 +2508,10 @@ function openConfirmModal(
   confirmTitle.textContent =
     title;
 
+
   confirmMessage.textContent =
     message;
+
 
   confirmAction =
     action;
@@ -2012,9 +2537,9 @@ function closeConfirmModal(){
 }
 
 
-/* =========================
+/* =========================================================
    EVENT LISTENERS
-========================= */
+========================================================= */
 
 document
   .getElementById('addPageBtn')
@@ -2063,7 +2588,7 @@ cancelLinkBtn.addEventListener(
 confirmBtn.addEventListener(
   'click',
   ()=>{
-
+    
     if(confirmAction){
 
       confirmAction();
@@ -2082,9 +2607,9 @@ cancelConfirmBtn.addEventListener(
 );
 
 
-/* =========================
-   MODAL OUTSIDE CLICK
-========================= */
+/* =========================================================
+   OUTSIDE CLICK
+========================================================= */
 
 pageModal.addEventListener(
   'click',
@@ -2156,9 +2681,9 @@ editModal.addEventListener(
 );
 
 
-/* =========================
+/* =========================================================
    ENTER KEY SUPPORT
-========================= */
+========================================================= */
 
 newPageNameInput.addEventListener(
   'keypress',
@@ -2256,51 +2781,40 @@ editURLInput.addEventListener(
 );
 
 
-/* =========================
+/* =========================================================
    ICON UPLOAD
-========================= */
+========================================================= */
 
 uploadIconBtn.onclick =
   ()=>{
-
     iconUploadInput.click();
-
   };
 
 
 iconUploadInput.onchange =
-  (e)=>{
+  (event)=>{
 
     const file =
-      e.target.files[0];
+      event.target.files[0];
 
 
     if(!file) return;
 
 
-    const reader =
-      new FileReader();
-
-
-    reader.onload =
-      ()=>{
-
+    readImageFile(
+      file,
+      (image)=>{
         editImageInput.value =
-          reader.result;
-
-      };
-
-
-    reader.readAsDataURL(
-      file
+          image;
+      }
     );
 
   };
 
 
-/* =========================
+/* =========================================================
    DELETE PAGE
-========================= */
+========================================================= */
 
 function deletePage(
   pageIndex
@@ -2337,9 +2851,9 @@ function deletePage(
 }
 
 
-/* =========================
+/* =========================================================
    ADD BOARD
-========================= */
+========================================================= */
 
 function addBoard(
   pageIndex
@@ -2352,9 +2866,9 @@ function addBoard(
 }
 
 
-/* =========================
+/* =========================================================
    DELETE BOARD
-========================= */
+========================================================= */
 
 function deleteBoard(
   pageIndex,
@@ -2397,9 +2911,9 @@ function deleteBoard(
 }
 
 
-/* =========================
-   INDEXED DB SYSTEM
-========================= */
+/* =========================================================
+   INDEXED DB
+========================================================= */
 
 let bgDatabase;
 
@@ -2454,9 +2968,9 @@ dbRequest.onerror =
   };
 
 
-/* =========================
-   SAVE BACKGROUND
-========================= */
+/* =========================================================
+   BACKGROUND IMAGE
+========================================================= */
 
 function saveBackgroundImage(
   file
@@ -2517,9 +3031,28 @@ function saveBackgroundImage(
 }
 
 
-/* =========================
-   LOAD BACKGROUND
-========================= */
+/* =========================================================
+   CUSTOM BACKGROUND ELEMENT
+========================================================= */
+
+const bgImage =
+  document.createElement(
+    'img'
+  );
+
+
+bgImage.className =
+  'custom-bg-image';
+
+
+document.body.prepend(
+  bgImage
+);
+
+
+/* =========================================================
+   LOAD SAVED BACKGROUND
+========================================================= */
 
 function loadSavedBackground(){
 
@@ -2533,6 +3066,7 @@ function loadSavedBackground(){
 
     bgImage.src =
       savedURL;
+
 
     bgImage.classList.add(
       'active'
@@ -2581,6 +3115,7 @@ function loadSavedBackground(){
         bgImage.src =
           imageURL;
 
+
         bgImage.classList.add(
           'active'
         );
@@ -2592,9 +3127,9 @@ function loadSavedBackground(){
 }
 
 
-/* =========================
-   CUSTOM BACKGROUND SYSTEM
-========================= */
+/* =========================================================
+   BACKGROUND MODAL
+========================================================= */
 
 const bgImageBtn =
   document.getElementById(
@@ -2607,25 +3142,6 @@ const bgImageInput =
     'bgImageInput'
   );
 
-
-const bgImage =
-  document.createElement(
-    'img'
-  );
-
-
-bgImage.className =
-  'custom-bg-image';
-
-
-document.body.prepend(
-  bgImage
-);
-
-
-/* =========================
-   BACKGROUND MODAL
-========================= */
 
 const backgroundModal =
   document.getElementById(
@@ -2663,14 +3179,14 @@ const removeBackgroundBtn =
   );
 
 
-/* =========================
-   OPEN BACKGROUND MODAL
-========================= */
+/* =========================================================
+   BACKGROUND MODAL EVENTS
+========================================================= */
 
 bgImageBtn.addEventListener(
   'click',
   ()=>{
-
+    
     backgroundURL.value =
       '';
 
@@ -2682,10 +3198,6 @@ bgImageBtn.addEventListener(
   }
 );
 
-
-/* =========================
-   CLOSE BACKGROUND MODAL
-========================= */
 
 function closeBackgroundModal(){
 
@@ -2702,14 +3214,10 @@ cancelBackgroundBtn.addEventListener(
 );
 
 
-/* =========================
-   APPLY URL BACKGROUND
-========================= */
-
 saveBackgroundBtn.addEventListener(
   'click',
   ()=>{
-
+    
     const imageUrl =
       backgroundURL.value.trim();
 
@@ -2738,23 +3246,13 @@ saveBackgroundBtn.addEventListener(
 );
 
 
-/* =========================
-   DEVICE BACKGROUND UPLOAD
-========================= */
-
 uploadBackgroundBtn.addEventListener(
   'click',
   ()=>{
-
     bgImageInput.click();
-
   }
 );
 
-
-/* =========================
-   BACKGROUND OUTSIDE CLICK
-========================= */
 
 backgroundModal.addEventListener(
   'click',
@@ -2773,15 +3271,11 @@ backgroundModal.addEventListener(
 );
 
 
-/* =========================
-   BACKGROUND FILE CHANGE
-========================= */
-
 bgImageInput.onchange =
-  async (e)=>{
+  async (event)=>{
 
     const file =
-      e.target.files[0];
+      event.target.files[0];
 
 
     if(!file) return;
@@ -2821,8 +3315,6 @@ bgImageInput.onchange =
       closeBackgroundModal();
 
     }
-
-
     catch(error){
 
       console.error(
@@ -2835,9 +3327,9 @@ bgImageInput.onchange =
   };
 
 
-/* =========================
+/* =========================================================
    ADD LINK
-========================= */
+========================================================= */
 
 function addLink(
   pageIndex,
@@ -2852,9 +3344,9 @@ function addLink(
 }
 
 
-/* =========================
+/* =========================================================
    DELETE LINK
-========================= */
+========================================================= */
 
 function deleteLink(
   pageIndex,
@@ -2901,14 +3393,14 @@ function deleteLink(
 }
 
 
-/* =========================
+/* =========================================================
    REMOVE BACKGROUND
-========================= */
+========================================================= */
 
 removeBackgroundBtn.addEventListener(
   'click',
   ()=>{
-
+    
     bgImage.src =
       '';
 
@@ -2951,15 +3443,12 @@ removeBackgroundBtn.addEventListener(
 );
 
 
-/* =========================
-   LOAD SAVED DATA
-========================= */
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+updatePersonalization();
 
 renderPages();
-
-
-/* =========================
-   START NAME SYSTEM
-========================= */
 
 checkFirstVisit();

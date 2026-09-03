@@ -1486,3 +1486,229 @@ body.blur-enabled .board-box:hover{
   0 0 22px rgba(255,37,37,0.35);
 
 }
+
+/* =========================
+   PERSONALIZATION SYSTEM
+========================= */
+
+.name-modal-card{
+  width:min(
+    560px,
+    calc(100% - 30px)
+  );
+
+  max-height:90vh;
+  overflow-y:auto;
+}
+
+
+.name-modal-card::-webkit-scrollbar{
+  width:6px;
+}
+
+
+.name-modal-card::-webkit-scrollbar-thumb{
+  background:#333;
+  border-radius:20px;
+}
+
+
+.name-modal-card .modal-header h2{
+  color:#ffffff;
+}
+
+
+.name-modal-card .modal-header p{
+  line-height:1.6;
+}
+
+
+.personal-label{
+  display:block;
+  color:#ffffff;
+  font-size:14px;
+  font-weight:500;
+  margin-bottom:9px;
+}
+
+
+.personal-label span{
+  color:#ff2525;
+}
+
+
+.personal-label small{
+  color:#8f8f8f;
+  font-size:12px;
+  font-weight:400;
+}
+
+
+/* =========================
+   IMAGE UPLOAD BOX
+========================= */
+
+.image-upload-box{
+  display:flex;
+  align-items:center;
+  gap:18px;
+
+  width:100%;
+
+  padding:16px;
+
+  margin-bottom:24px;
+
+  border:
+  1px solid rgba(255,255,255,0.10);
+
+  border-radius:18px;
+
+  background:
+  rgba(255,255,255,0.035);
+
+  backdrop-filter:
+  blur(18px);
+
+  -webkit-backdrop-filter:
+  blur(18px);
+}
+
+
+.image-preview{
+  width:70px;
+  height:70px;
+
+  min-width:70px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:16px;
+
+  background:
+  rgba(255,255,255,0.07);
+
+  border:
+  1px solid rgba(255,255,255,0.10);
+
+  overflow:hidden;
+}
+
+
+.image-preview span{
+  font-size:28px;
+  opacity:0.65;
+}
+
+
+.image-preview img{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  display:block;
+}
+
+
+.image-upload-content{
+  flex:1;
+  min-width:0;
+}
+
+
+.image-upload-content p{
+  color:#a9a9a9;
+  font-size:12px;
+  line-height:1.5;
+  margin-bottom:10px;
+}
+
+
+.image-upload-content .add-link-btn{
+  margin-right:8px;
+}
+
+
+.remove-image-btn{
+  border:none;
+
+  background:
+  rgba(255,255,255,0.07);
+
+  color:#ffffff;
+
+  padding:10px 14px;
+
+  border-radius:12px;
+
+  cursor:pointer;
+
+  font-size:12px;
+
+  transition:0.25s ease;
+}
+
+
+.remove-image-btn:hover{
+  background:
+  rgba(255,37,37,0.18);
+
+  color:#ff2525;
+}
+
+
+#saveNameBtn,
+#saveChangeNameBtn{
+  min-width:140px;
+}
+
+
+#changeNameBtn{
+  font-size:18px;
+}
+
+
+#changeNameBtn:hover{
+  background:#ff2525;
+
+  box-shadow:
+  0 0 22px rgba(255,37,37,0.35);
+}
+
+
+/* =========================
+   MOBILE PERSONALIZATION
+========================= */
+
+@media(max-width:600px){
+
+  .name-modal-card{
+    width:
+    calc(100% - 24px);
+
+    padding:
+    25px 20px;
+  }
+
+
+  .image-upload-box{
+    align-items:flex-start;
+  }
+
+
+  .image-preview{
+    width:60px;
+    height:60px;
+    min-width:60px;
+  }
+
+
+  .image-upload-content .add-link-btn,
+  .remove-image-btn{
+    margin-bottom:7px;
+  }
+
+}

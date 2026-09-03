@@ -8,6 +8,7 @@
   <title>Arsalan Hub</title>
 
   <link
+    id="faviconLink"
     rel="icon"
     type="image/png"
     href="Images/Icon Images/A_Logo.png"
@@ -44,6 +45,7 @@
         src="Images/Icon Images/A_Logo1.png"
         alt="Logo"
         class="logo-icon"
+        id="hubLogo"
       >
 
       <h1>Arsalan Hub</h1>
@@ -82,12 +84,12 @@
 
     <div class="top-controls">
 
-      <!-- CHANGE NAME -->
+      <!-- PERSONALIZATION -->
 
       <button
         class="toggle-btn"
         id="changeNameBtn"
-        title="Change Name"
+        title="Personalize Hub"
       >
         ✎
       </button>
@@ -98,6 +100,7 @@
       <button
         class="toggle-btn blur-off"
         id="blurToggleBtn"
+        title="Toggle Blur"
       >
         👁
       </button>
@@ -577,7 +580,7 @@
 
 
   <!-- =========================
-       FIRST TIME WELCOME MODAL
+       FIRST TIME PERSONALIZATION
   ========================= -->
 
   <div
@@ -599,6 +602,11 @@
       </div>
 
 
+      <label class="personal-label">
+        Your Name <span>*</span>
+      </label>
+
+
       <input
         id="userNameInput"
         class="modal-input"
@@ -607,6 +615,59 @@
         maxlength="30"
         autocomplete="off"
       />
+
+
+      <label class="personal-label">
+        Hub Image
+        <small>(Optional)</small>
+      </label>
+
+
+      <div class="image-upload-box">
+
+        <div
+          class="image-preview"
+          id="nameImagePreview"
+        >
+          <span>🖼</span>
+        </div>
+
+
+        <div class="image-upload-content">
+
+          <p>
+            Use one image for your Hub and browser tab.
+          </p>
+
+
+          <button
+            type="button"
+            class="add-link-btn"
+            id="selectNameImageBtn"
+          >
+            Choose Image
+          </button>
+
+
+          <button
+            type="button"
+            class="remove-image-btn"
+            id="removeNameImageBtn"
+          >
+            Remove Image
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <input
+        type="file"
+        id="nameImageInput"
+        accept="image/*"
+        style="display:none;"
+      >
 
 
       <div
@@ -623,7 +684,7 @@
           class="modal-button primary"
           id="saveNameBtn"
         >
-          Confirm
+          Create My Hub
         </button>
 
       </div>
@@ -634,7 +695,7 @@
 
 
   <!-- =========================
-       CHANGE NAME MODAL
+       CHANGE PERSONALIZATION
   ========================= -->
 
   <div
@@ -646,13 +707,18 @@
 
       <div class="modal-header">
 
-        <h2>Change Your Name</h2>
+        <h2>Personalize Your Hub ✨</h2>
 
         <p>
-          Enter a new name for your personal Hub.
+          Change your Hub name and image anytime.
         </p>
 
       </div>
+
+
+      <label class="personal-label">
+        Your Name <span>*</span>
+      </label>
 
 
       <input
@@ -663,6 +729,59 @@
         maxlength="30"
         autocomplete="off"
       />
+
+
+      <label class="personal-label">
+        Hub Image
+        <small>(Optional)</small>
+      </label>
+
+
+      <div class="image-upload-box">
+
+        <div
+          class="image-preview"
+          id="changeImagePreview"
+        >
+          <span>🖼</span>
+        </div>
+
+
+        <div class="image-upload-content">
+
+          <p>
+            The same image will be used for your Hub and tab.
+          </p>
+
+
+          <button
+            type="button"
+            class="add-link-btn"
+            id="selectChangeImageBtn"
+          >
+            Choose Image
+          </button>
+
+
+          <button
+            type="button"
+            class="remove-image-btn"
+            id="removeChangeImageBtn"
+          >
+            Remove Image
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <input
+        type="file"
+        id="changeImageInput"
+        accept="image/*"
+        style="display:none;"
+      >
 
 
       <div
@@ -687,7 +806,7 @@
           class="modal-button primary"
           id="saveChangeNameBtn"
         >
-          Save
+          Save Changes
         </button>
 
       </div>
