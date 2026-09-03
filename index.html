@@ -6,11 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <title>Arsalan Hub</title>
-  <link rel="icon" type="image/png" href="Images/Icon Images/A_Logo.png"/>
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="Images/Icon Images/A_Logo.png"
+  />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
   <link rel="stylesheet" href="style.css"/>
 
@@ -22,28 +31,47 @@
   <div class="glass-overlay"></div>
   <div class="red-line"></div>
 
-  <!-- NAVBAR -->
+
+  <!-- =========================
+       NAVBAR
+  ========================= -->
 
   <div class="navbar">
 
     <div class="logo">
-      <img src="Images/Icon Images/A_Logo1.png" alt="Logo" class="logo-icon">
+
+      <img
+        src="Images/Icon Images/A_Logo1.png"
+        alt="Logo"
+        class="logo-icon"
+      >
+
       <h1>Arsalan Hub</h1>
+
     </div>
+
 
     <div class="nav-area">
 
-      <div class="nav-buttons" id="navButtons">
+      <div
+        class="nav-buttons"
+        id="navButtons"
+      >
 
         <button
-        class="nav-btn active"
-        data-page="home">
+          class="nav-btn active"
+          data-page="home"
+        >
 
           <span>Home</span>
 
         </button>
 
-        <button class="add-page-btn" id="addPageBtn">
+
+        <button
+          class="add-page-btn"
+          id="addPageBtn"
+        >
           +
         </button>
 
@@ -51,44 +79,77 @@
 
     </div>
 
+
     <div class="top-controls">
 
-      <button
-      class="toggle-btn blur-off"
-      id="blurToggleBtn">
+      <!-- CHANGE NAME -->
 
+      <button
+        class="toggle-btn"
+        id="changeNameBtn"
+        title="Change Name"
+      >
+        ✎
+      </button>
+
+
+      <!-- BLUR -->
+
+      <button
+        class="toggle-btn blur-off"
+        id="blurToggleBtn"
+      >
         👁
       </button>
 
+
+      <!-- BACKGROUND -->
+
       <button
-      class="toggle-btn"
-      id="bgImageBtn">
-
+        class="toggle-btn"
+        id="bgImageBtn"
+        title="Change Background"
+      >
         🖼
-
       </button>
 
+
       <input
-      type="file"
-      id="bgImageInput"
-      accept="image/*"
-      style="display:none;">
+        type="file"
+        id="bgImageInput"
+        accept="image/*"
+        style="display:none;"
+      >
 
     </div>
 
   </div>
 
-  <!-- MAIN -->
 
-  <div class="main" id="mainContent">
+  <!-- =========================
+       MAIN
+  ========================= -->
 
-    <div class="page active" id="homePage">
+  <div
+    class="main"
+    id="mainContent"
+  >
+
+    <!-- HOME -->
+
+    <div
+      class="page active"
+      id="homePage"
+    >
 
       <div class="home-center">
 
         <p>
-          Your personal <span>browsers</span> workspace
+          Your personal
+          <span>browsers</span>
+          workspace
         </p>
+
 
         <div class="big-search">
 
@@ -106,84 +167,232 @@
 
   </div>
 
-  <div class="modal-overlay" id="pageModal">
+
+  <!-- =========================
+       CREATE PAGE MODAL
+  ========================= -->
+
+  <div
+    class="modal-overlay"
+    id="pageModal"
+  >
+
     <div class="modal-card">
+
       <div class="modal-header">
+
         <h2>Create New Page</h2>
-        <p>Enter a name for your page and it will appear in the navigation bar.</p>
+
+        <p>
+          Enter a name for your page and it will appear
+          in the navigation bar.
+        </p>
+
       </div>
+
+
       <input
         id="newPageName"
         class="modal-input"
         type="text"
         placeholder="Page name"
       />
-      <div class="modal-error" id="modalError">Page name cannot be empty.</div>
-      <div class="modal-actions">
-        <button class="modal-button secondary" id="cancelPageBtn">Cancel</button>
-        <button class="modal-button primary" id="createPageBtn">Create Page</button>
+
+
+      <div
+        class="modal-error"
+        id="modalError"
+      >
+        Page name cannot be empty.
       </div>
+
+
+      <div class="modal-actions">
+
+        <button
+          class="modal-button secondary"
+          id="cancelPageBtn"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="modal-button primary"
+          id="createPageBtn"
+        >
+          Create Page
+        </button>
+
+      </div>
+
     </div>
+
   </div>
 
-  <div class="modal-overlay" id="boardModal">
+
+  <!-- =========================
+       CREATE BOARD MODAL
+  ========================= -->
+
+  <div
+    class="modal-overlay"
+    id="boardModal"
+  >
+
     <div class="modal-card">
+
       <div class="modal-header">
+
         <h2>Create New Board</h2>
-        <p>Enter a name for this board and it will be added to the current page.</p>
+
+        <p>
+          Enter a name for this board and it will be
+          added to the current page.
+        </p>
+
       </div>
+
+
       <input
         id="newBoardName"
         class="modal-input"
         type="text"
         placeholder="Board name"
       />
-      <div class="modal-error" id="boardModalError">Board name cannot be empty.</div>
-      <div class="modal-actions">
-        <button class="modal-button secondary" id="cancelBoardBtn">Cancel</button>
-        <button class="modal-button primary" id="createBoardBtn">Create Board</button>
+
+
+      <div
+        class="modal-error"
+        id="boardModalError"
+      >
+        Board name cannot be empty.
       </div>
+
+
+      <div class="modal-actions">
+
+        <button
+          class="modal-button secondary"
+          id="cancelBoardBtn"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="modal-button primary"
+          id="createBoardBtn"
+        >
+          Create Board
+        </button>
+
+      </div>
+
     </div>
+
   </div>
 
-  <div class="modal-overlay" id="linkModal">
+
+  <!-- =========================
+       ADD LINK MODAL
+  ========================= -->
+
+  <div
+    class="modal-overlay"
+    id="linkModal"
+  >
+
     <div class="modal-card">
+
       <div class="modal-header">
+
         <h2>Add New Link</h2>
-        <p>Enter the link name and URL to add it to this board.</p>
+
+        <p>
+          Enter the link name and URL to add it to this board.
+        </p>
+
       </div>
+
+
       <input
         id="newLinkName"
         class="modal-input"
         type="text"
         placeholder="Link name"
       />
+
+
       <input
         id="newLinkURL"
         class="modal-input"
         type="text"
         placeholder="Link URL"
       />
-      <div class="modal-error" id="linkModalError">Link name and URL are required.</div>
-      <div class="modal-actions">
-        <button class="modal-button secondary" id="cancelLinkBtn">Cancel</button>
-        <button class="modal-button primary" id="createLinkBtn">Add Link</button>
+
+
+      <div
+        class="modal-error"
+        id="linkModalError"
+      >
+        Link name and URL are required.
       </div>
+
+
+      <div class="modal-actions">
+
+        <button
+          class="modal-button secondary"
+          id="cancelLinkBtn"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="modal-button primary"
+          id="createLinkBtn"
+        >
+          Add Link
+        </button>
+
+      </div>
+
     </div>
+
   </div>
 
-  <div class="modal-overlay" id="editModal">
+
+  <!-- =========================
+       EDIT MODAL
+  ========================= -->
+
+  <div
+    class="modal-overlay"
+    id="editModal"
+  >
+
     <div class="modal-card">
+
       <div class="modal-header">
-        <h2 id="editTitle">Edit Item</h2>
-        <p id="editSubtitle">Update the name or URL for the selected item.</p>
+
+        <h2 id="editTitle">
+          Edit Item
+        </h2>
+
+        <p id="editSubtitle">
+          Update the name or URL for the selected item.
+        </p>
+
       </div>
+
+
       <input
         id="editName"
         class="modal-input"
         type="text"
         placeholder="Name"
       />
+
+
       <input
         id="editURL"
         class="modal-input"
@@ -191,6 +400,8 @@
         placeholder="URL"
         style="display:none;"
       />
+
+
       <input
         id="editImage"
         class="modal-input"
@@ -199,94 +410,292 @@
         style="display:none;"
       />
 
-      <button id="uploadIconBtn" class="add-link-btn" type="button">Upload Icon</button>
-      
+
+      <button
+        id="uploadIconBtn"
+        class="add-link-btn"
+        type="button"
+      >
+        Upload Icon
+      </button>
+
+
       <input
         type="file"
         id="iconUploadInput"
         accept="image/*"
         style="display:none;"
       >
-      <div class="modal-error" id="editModalError">Please enter a valid name.</div>
-      <div class="modal-actions">
-        <button class="modal-button secondary" id="cancelEditBtn">Cancel</button>
-        <button class="modal-button primary" id="saveEditBtn">Save</button>
+
+
+      <div
+        class="modal-error"
+        id="editModalError"
+      >
+        Please enter a valid name.
       </div>
+
+
+      <div class="modal-actions">
+
+        <button
+          class="modal-button secondary"
+          id="cancelEditBtn"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="modal-button primary"
+          id="saveEditBtn"
+        >
+          Save
+        </button>
+
+      </div>
+
     </div>
+
   </div>
 
-  <div class="modal-overlay" id="confirmModal">
+
+  <!-- =========================
+       CONFIRM MODAL
+  ========================= -->
+
+  <div
+    class="modal-overlay"
+    id="confirmModal"
+  >
+
     <div class="modal-card">
+
       <div class="modal-header">
-        <h2 id="confirmTitle">Confirm Action</h2>
-        <p id="confirmMessage">Are you sure?</p>
+
+        <h2 id="confirmTitle">
+          Confirm Action
+        </h2>
+
+        <p id="confirmMessage">
+          Are you sure?
+        </p>
+
       </div>
+
+
       <div class="modal-actions">
-        <button class="modal-button secondary" id="cancelConfirmBtn">Cancel</button>
-        <button class="modal-button primary" id="confirmBtn">Confirm</button>
+
+        <button
+          class="modal-button secondary"
+          id="cancelConfirmBtn"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="modal-button primary"
+          id="confirmBtn"
+        >
+          Confirm
+        </button>
+
       </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="backgroundModal">
-
-  <div class="modal-card">
-
-    <div class="modal-header">
-
-      <h2>Change Background</h2>
-
-      <p>
-        Upload image from your device or paste image URL.
-      </p>
-
-    </div>
-
-    <input
-    type="text"
-    id="backgroundURL"
-    class="modal-input"
-    placeholder="Paste image URL">
-
-    <div class="modal-actions">
-
-      <button
-      class="modal-button secondary"
-      id="uploadBackgroundBtn">
-
-        Upload From Device
-
-      </button>
-
-      <button
-      class="modal-button secondary"
-      id="removeBackgroundBtn">
-
-      Remove Background
-
-      </button>
-
-      <button
-      class="modal-button secondary"
-      id="cancelBackgroundBtn">
-
-        Cancel
-
-      </button>
-
-      <button
-      class="modal-button primary"
-      id="saveBackgroundBtn">
-
-        Apply Background
-
-      </button>
 
     </div>
 
   </div>
 
-</div>
+
+  <!-- =========================
+       BACKGROUND MODAL
+  ========================= -->
+
+  <div
+    class="modal-overlay"
+    id="backgroundModal"
+  >
+
+    <div class="modal-card">
+
+      <div class="modal-header">
+
+        <h2>Change Background</h2>
+
+        <p>
+          Upload image from your device or paste image URL.
+        </p>
+
+      </div>
+
+
+      <input
+        type="text"
+        id="backgroundURL"
+        class="modal-input"
+        placeholder="Paste image URL"
+      />
+
+
+      <div class="modal-actions">
+
+        <button
+          class="modal-button secondary"
+          id="uploadBackgroundBtn"
+        >
+          Upload From Device
+        </button>
+
+
+        <button
+          class="modal-button secondary"
+          id="removeBackgroundBtn"
+        >
+          Remove Background
+        </button>
+
+
+        <button
+          class="modal-button secondary"
+          id="cancelBackgroundBtn"
+        >
+          Cancel
+        </button>
+
+
+        <button
+          class="modal-button primary"
+          id="saveBackgroundBtn"
+        >
+          Apply Background
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       FIRST TIME WELCOME MODAL
+  ========================= -->
+
+  <div
+    class="modal-overlay"
+    id="nameModal"
+  >
+
+    <div class="modal-card name-modal-card">
+
+      <div class="modal-header">
+
+        <h2>Welcome to Your Hub 👋</h2>
+
+        <p>
+          Let's personalize your dashboard.
+          Enter your name to get started.
+        </p>
+
+      </div>
+
+
+      <input
+        id="userNameInput"
+        class="modal-input"
+        type="text"
+        placeholder="Enter your name"
+        maxlength="30"
+        autocomplete="off"
+      />
+
+
+      <div
+        class="modal-error"
+        id="nameModalError"
+      >
+        Please enter your name.
+      </div>
+
+
+      <div class="modal-actions">
+
+        <button
+          class="modal-button primary"
+          id="saveNameBtn"
+        >
+          Confirm
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       CHANGE NAME MODAL
+  ========================= -->
+
+  <div
+    class="modal-overlay"
+    id="changeNameModal"
+  >
+
+    <div class="modal-card name-modal-card">
+
+      <div class="modal-header">
+
+        <h2>Change Your Name</h2>
+
+        <p>
+          Enter a new name for your personal Hub.
+        </p>
+
+      </div>
+
+
+      <input
+        id="changeNameInput"
+        class="modal-input"
+        type="text"
+        placeholder="Enter your name"
+        maxlength="30"
+        autocomplete="off"
+      />
+
+
+      <div
+        class="modal-error"
+        id="changeNameError"
+      >
+        Please enter your name.
+      </div>
+
+
+      <div class="modal-actions">
+
+        <button
+          class="modal-button secondary"
+          id="cancelChangeNameBtn"
+        >
+          Cancel
+        </button>
+
+
+        <button
+          class="modal-button primary"
+          id="saveChangeNameBtn"
+        >
+          Save
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
 
   <script src="script.js"></script>
 
