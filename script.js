@@ -857,95 +857,106 @@ blurBtn.onclick =
    SEARCH
 ========================================================= */
 
-const searchInput =
-  document.getElementById('searchInput');
-
-const searchButton =
-  document.getElementById('searchButton');
+const searchInput = document.getElementById('searchInput');
+const searchButton = document.getElementById('searchButton');
 
 
-function performSearch(){
+function performSearch() {
 
-  let value =
-    searchInput.value.trim();
+  if (!searchInput) {
+    return;
+  }
 
+  let value = searchInput.value.trim();
 
-  if(value === ''){
+  if (value === '') {
     return;
   }
 
 
-  /*
-     URL detection
-  */
+  // ---------------------------------------------------------
+  // DIRECT URL
+  // ---------------------------------------------------------
 
-  if(
+  if (
     value.startsWith('http://') ||
-    value.startsWith('https://') ||
-    (
-      value.includes('.') &&
-      !value.includes(' ')
-    )
-  ){
+    value.startsWith('https://')
+  ) {
 
-    if(
-      !value.startsWith('http://') &&
-      !value.startsWith('https://')
-    ){
+    window.location.href = value;
 
-      value =
-        'https://' + value;
+    return;
+  }
+
+
+  // ---------------------------------------------------------
+  // DOMAIN
+  // Example: youtube.com
+  // ---------------------------------------------------------
+
+  if (
+    value.includes('.') &&
+    !value.includes(' ')
+  ) {
+
+    window.location.href = 'https://' + value;
+
+    return;
+  }
+
+
+  // ---------------------------------------------------------
+  // GOOGLE SEARCH
+  // ---------------------------------------------------------
+
+  window.location.href =
+    'https://www.google.com/search?q=' +
+    encodeURIComponent(value);
+}
+
+
+/* =========================================================
+   ENTER KEY
+========================================================= */
+
+if (searchInput) {
+
+  searchInput.addEventListener(
+    'keydown',
+    function (event) {
+
+      if (event.key === 'Enter') {
+
+        event.preventDefault();
+
+        performSearch();
+
+      }
 
     }
-
-
-    window.location.assign(value);
-
-  }
-
-  /*
-     Google search
-  */
-
-  else{
-
-    window.location.assign(
-      `https://www.google.com/search?q=${encodeURIComponent(value)}`
-    );
-
-  }
+  );
 
 }
 
 
-/*
-   ENTER KEY
-*/
+/* =========================================================
+   FIRE BUTTON
+========================================================= */
 
-searchInput.addEventListener(
-  'keydown',
-  function(event){
+if (searchButton) {
 
-    if(event.key === 'Enter'){
+  searchButton.addEventListener(
+    'click',
+    function (event) {
 
       event.preventDefault();
 
       performSearch();
 
     }
+  );
 
-  }
-);
-
-
-/*
-   FIRE SEARCH BUTTON
-*/
-
-searchButton.addEventListener(
-  'click',
-  performSearch
-);
+}
 
 
 /* =========================================================
